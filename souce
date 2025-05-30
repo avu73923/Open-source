@@ -1,0 +1,201 @@
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+
+if CoreGui:FindFirstChild("UiCayThue") then
+    CoreGui:FindFirstChild("UiCayThue"):Destroy()
+end
+
+local UiCayThue = Instance.new("ScreenGui")
+local UiChinh = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local Close = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local Name = Instance.new("TextLabel")
+local TenDon = Instance.new("TextLabel")
+local JobId = Instance.new("TextBox")
+local UICorner_3 = Instance.new("UICorner")
+local JoinJobId = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+
+UiCayThue.Name = "UiCayThue"
+UiCayThue.Parent = CoreGui
+UiCayThue.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+UiChinh.Name = "UiChinh"
+UiChinh.Parent = UiCayThue
+UiChinh.BackgroundColor3 = Color3.fromRGB(141, 141, 141)
+UiChinh.BackgroundTransparency = 0.250
+UiChinh.BorderColor3 = Color3.fromRGB(0, 0, 0)
+UiChinh.BorderSizePixel = 0
+UiChinh.Position = UDim2.new(0.404637247, -29, -0.00203252025, 13)
+UiChinh.Size = UDim2.new(0, 313, 0, 134)
+
+UICorner.Parent = UiChinh
+
+Close.Name = "Close"
+Close.Parent = UiChinh
+Close.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+Close.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Close.BorderSizePixel = 0
+Close.Position = UDim2.new(0.907348216, 0, 0.0425531901, 0)
+Close.Size = UDim2.new(0, 20, 0, 20)
+Close.Font = Enum.Font.SourceSans
+Close.Text = "X"
+Close.TextColor3 = Color3.fromRGB(0, 0, 0)
+Close.TextSize = 14.000
+
+UICorner_2.CornerRadius = UDim.new(0, 7)
+UICorner_2.Parent = Close
+
+Name.Name = "Name"
+Name.Parent = UiChinh
+Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Name.BackgroundTransparency = 1.000
+Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Name.BorderSizePixel = 0
+Name.Position = UDim2.new(0.0958466455, 0, 0.111940302, 0)
+Name.Size = UDim2.new(0, 254, 0, 40)
+Name.Font = Enum.Font.FredokaOne
+Name.Text = "Tên: N/A"
+Name.TextColor3 = Color3.fromRGB(255, 255, 255)
+Name.TextScaled = true
+Name.TextSize = 14.000
+Name.TextWrapped = true
+
+TenDon.Name = "TenDon"
+TenDon.Parent = UiChinh
+TenDon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TenDon.BackgroundTransparency = 1.000
+TenDon.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TenDon.BorderSizePixel = 0
+TenDon.Position = UDim2.new(0.22364217, 0, 0.410447747, 0)
+TenDon.Size = UDim2.new(0, 173, 0, 44)
+TenDon.Font = Enum.Font.FredokaOne
+TenDon.Text = "Tên Đơn: N/A"
+TenDon.TextColor3 = Color3.fromRGB(255, 255, 255)
+TenDon.TextScaled = true
+TenDon.TextSize = 12.000
+TenDon.TextWrapped = true
+
+JobId.Name = "JobId"
+JobId.Parent = UiChinh
+JobId.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+JobId.BackgroundTransparency = 0.250
+JobId.BorderColor3 = Color3.fromRGB(0, 0, 0)
+JobId.BorderSizePixel = 0
+JobId.Position = UDim2.new(-0.000439726136, 0, 0.813099205, 0)
+JobId.Size = UDim2.new(0, 284, 0, 25)
+JobId.Font = Enum.Font.FredokaOne
+JobId.PlaceholderText = "Nhập JobId"
+JobId.Text = ""
+JobId.TextColor3 = Color3.fromRGB(0, 0, 0)
+JobId.TextSize = 14.000
+
+UICorner_3.Parent = JobId
+JoinJobId.Name = "JoinJobId"
+JoinJobId.Parent = UiChinh
+JoinJobId.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+JoinJobId.BorderColor3 = Color3.fromRGB(0, 0, 0)
+JoinJobId.BorderSizePixel = 0
+JoinJobId.Position = UDim2.new(0.90846169, 0, 0.813099205, 0)
+JoinJobId.Size = UDim2.new(0, 28, 0, 25)
+JoinJobId.Font = Enum.Font.SourceSans
+JoinJobId.Text = "✓"
+JoinJobId.TextColor3 = Color3.fromRGB(0, 0, 0)
+JoinJobId.TextSize = 14.000
+
+UICorner_4.Parent = JoinJobId
+
+-- Scripts:
+
+local function ZBJBCG_fake_script() -- Close.LocalScript 
+	local script = Instance.new('LocalScript', Close)
+
+	local close = script.Parent
+	local Main = script.Parent.Parent
+	
+	close.MouseButton1Click:Connect(function ()
+		Main.Visible = false
+	end)
+end
+coroutine.wrap(ZBJBCG_fake_script)()
+local function TJOB_fake_script() -- Name.LocalScript 
+	local script = Instance.new('LocalScript', Name)
+
+	local Players = game:GetService("Players")
+	local player = Players.LocalPlayer
+	local Name = script.Parent -- đặt script này bên trong TextLabel
+	
+	local function ObfuscateName(name)
+		local length = #name
+		local visibleCount = math.ceil(length * 2 / 3)
+		local visiblePart = string.sub(name, 1, visibleCount)
+		local hiddenPart = string.rep("*", length - visibleCount)
+		return "Tên: " .. visiblePart .. hiddenPart
+	end
+	
+	Name.Text = ObfuscateName(player.Name)
+	
+end
+coroutine.wrap(TJOB_fake_script)()
+local function MFSMO_fake_script() -- UiChinh.DraggableScript 
+	local script = Instance.new('LocalScript', UiChinh)
+
+	script.Parent.Active = true
+	script.Parent.Draggable = true
+end
+coroutine.wrap(MFSMO_fake_script)()
+local function UGNPTI_fake_script() -- TenDon.LocalScript 
+	local script = Instance.new('LocalScript', TenDon)
+
+    local Don = getgenv().Don or "N/A"
+
+	local TenDon = script.Parent
+	
+	TenDon.Text = "📌 Tên đơn: "..Don
+	
+end
+coroutine.wrap(UGNPTI_fake_script)()
+local function LSEMWFD_fake_script() -- UiChinh.JoinJobIdScript 
+	local script = Instance.new('LocalScript', UiChinh)
+
+	local Players = game:GetService("Players")
+	local TeleportService = game:GetService("TeleportService")
+	local StarterGui = game:GetService("StarterGui")
+
+	local player = Players.LocalPlayer
+
+	local UiChinh = script.Parent
+	local button = UiChinh:WaitForChild("JoinJobId")
+	local jobIdTextbox = UiChinh:WaitForChild("JobId")
+
+	button.MouseButton1Click:Connect(function()
+		local jobIdStr = jobIdTextbox.Text
+
+		-- In kiểm tra
+		print("[LH DEBUG] JobId đã nhập:", jobIdStr)
+		print("[LH DEBUG] Loại:", typeof(TeleportService.TeleportToPlaceInstance))
+
+		if jobIdStr ~= "" then
+			local success, err = pcall(function()
+				TeleportService:TeleportToPlaceInstance(game.PlaceId, jobIdStr, player)
+			end)
+
+			if not success then
+				warn("Lỗi dịch chuyển:", err)
+				StarterGui:SetCore("SendNotification", {
+					Title = "Lỗi dịch chuyển",
+					Text = "Không thể vào JobId này",
+					Duration = 4
+				})
+			end
+		else
+			StarterGui:SetCore("SendNotification", {
+				Title = "Thiếu JobId",
+				Text = "Hãy nhập JobId trước khi dịch chuyển.",
+				Duration = 4
+			})
+		end
+	end)
+end
+coroutine.wrap(LSEMWFD_fake_script)()
