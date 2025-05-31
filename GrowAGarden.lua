@@ -42,7 +42,7 @@ local AutoDupesheckles = Tabs.Main:CreateToggle("AutoCollect", {
     Default = false
 })
 
-AutoDupesheckles:OnChanged(function(v)
+AutoDupesheckles:OnChanged(function()
         task.spawn(function()
     while true do wait()
         for i, v in pairs(game:GetService("Players"):GetPlayers()) do
