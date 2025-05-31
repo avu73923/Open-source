@@ -1,25 +1,11 @@
---[[
-███╗   ██╗ ██████╗ ██╗   ██╗██╗   ██╗███████╗███╗   ██╗    ███╗   ██╗██╗  ██╗ █████╗ ████████╗
-████╗  ██║██╔════╝ ██║   ██║╚██╗ ██╔╝██╔════╝████╗  ██║    ████╗  ██║██║  ██║██╔══██╗╚══██╔══╝
-██╔██╗ ██║██║  ███╗██║   ██║ ╚████╔╝ █████╗  ██╔██╗ ██║    ██╔██╗ ██║███████║███████║   ██║   
-██║╚██╗██║██║   ██║██║   ██║  ╚██╔╝  ██╔══╝  ██║╚██╗██║    ██║╚██╗██║██╔══██║██╔══██║   ██║   
-██║ ╚████║╚██████╔╝╚██████╔╝   ██║   ███████╗██║ ╚████║    ██║ ╚████║██║  ██║██║  ██║   ██║   
-╚═╝  ╚═══╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═══╝    ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
-
-[+] Rosie Team Cảm Ơn Bạn Đã Tin Tưởng Và Sử Dụng Dịch Vụ Của Chúng Tôi, Nếu Thấy Hữu Ít Hãy Chia Sẻ Cho Bạn Bè Của Bạn !!
-[+] Không Được Share Hay Crack Mã Nguồn Này Cho Ai! Nếu Không Bạn Sẽ Bị Ban IP Khỏi Website Vĩnh Viễn!
-[+] Chúng Tôi Không Nhận Hỗ Trợ Những Mã Nguồn Miễn Phí, Xin Đừng Bảo Vì Sao. Liên Hệ Hỗ Trợ Tại: https://nguyennhatit.pages.dev
-[+] Nếu Bạn Edit Source Và Up Web Share Nhớ Obfuscate Script. Nếu Bạn Có Tiền Thì Sử Dụng: Lura.Ph, Luarmor.Net | Nếu Bạn Không Có Tiền Thì Dùng: luaobfuscate.com, MoonSec, 77Fuscate,... Nhé!
-]]
-
 local Library = loadstring(game:HttpGetAsync("https://github.com/ActualMasterOogway/Fluent-Renewed/releases/latest/download/Fluent.luau"))()
 local SaveManager = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ActualMasterOogway/Fluent-Renewed/master/Addons/SaveManager.luau"))()
 local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/ActualMasterOogway/Fluent-Renewed/master/Addons/InterfaceManager.luau"))()
 
 -- Create Fluent Window
 local Window = Library:CreateWindow{
-    Title = `Cookie Hub {Library.Version}`,
-    SubTitle = "by Cookie Hub Developer Team",
+    Title = `BandiiosV2 Hub`,
+    SubTitle = "by Việt Hoàng IOS",
     TabWidth = 160,
     Size = UDim2.fromOffset(830, 525),
     Resize = true,
@@ -50,6 +36,25 @@ local SellInventoryToggle = Tabs.Main:CreateToggle("AutoSell", {
     Title = "Auto Sell Inventory Anywhere",
     Default = false
 })
+
+local AutoDupesheckles = Tabs.Main:CreateToggle("AutoCollect", {
+    Title = "Dupe Sheckles",
+    Default = false
+})
+
+AutoDupesheckles:OnChanged(function(v)
+        task.spawn(function()
+    while true do wait()
+        for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+            if v ~= game.Players.LocalPlayer then
+                local Pet = v.Character:FindFirstChildOfClass("Tool")
+                if Pet and Pet:GetAttribute("ItemType") == "Pet" then
+                    game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("SellPet_RE"):FireServer(Pet)
+                end
+            end
+        end
+    end
+end)
 
 -- Game Services
 local Players = game:GetService("Players")
