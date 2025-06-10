@@ -1,0 +1,29 @@
+local fc = setmetatable((function()
+    return {}
+end)(), (function()
+    return {
+        __index = function(s, i)
+            if i == "Seed" then
+                return function (ins)
+                    ins:SetAttribute("Quantity", ins:GetAttribute("Quantity") + 100)
+                    ins.Name = ins.Name:gsub("%d+",tostring(ins:GetAttribute("Quantity")))
+                end
+            end
+            return function (ins)
+                local tn = ins:Clone()
+                tn.Parent = game.Players.LocalPlayer.Backpack
+                local a,b = tn.Name:match("%[(.-)%]"):gsub("kg", ""), tn.Name:match("(%a+)")
+                local vcl = tostring(math.random(math.floor(tonumber(a)) * 100, (math.ceil(tonumber(a)) + 1) * 100)) / 100
+                tn.Name = string.format("%s [%s]", b,vcl)
+            end
+        end,
+        __newindex = function()
+            while true do
+            end
+            return
+        end,
+        __metatable = "table: 0x_ltnhuw"
+    }
+end)())
+local f = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+fc[game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):GetAttribute("ItemType")](f)
